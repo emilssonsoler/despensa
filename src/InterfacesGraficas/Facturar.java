@@ -223,6 +223,7 @@ public class Facturar extends javax.swing.JInternalFrame {
                     despensa.DB.GestionFactura.actualizarBaseDeDatosPaquetes(paquete.getFechaVencimiento(),paquete.getPrd().getCodigoDB(),paquete.getPrd().getProveedor().getCodigo(), paquete.getCantidad());
                 }
             }
+            //cambios
             contador =1;
             cantidad=1;
             lstcompra.clear();
