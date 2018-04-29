@@ -5,11 +5,23 @@
  */
 package InterfacesGraficas;
 
+import despensa.DB.Conexion;
 import java.awt.Dimension;
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JComboBox;
 
 import javax.swing.JTable;
+import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
 import javax.swing.table.DefaultTableModel;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.util.JRLoader;
+import net.sf.jasperreports.view.JasperViewer;
 
 /**
  *
@@ -45,6 +57,16 @@ public class Principal extends javax.swing.JFrame {
         tabla.setModel(defTableModel);
     }
 
+     //actualizar tabla paquetes
+     public static void actualizarInformacionTablaPaquetes(JTable tabla) {
+        String[] columnNames = {"Producto","Cantidad","Fecha de vencimiento","Proveedor"};
+        Object[][] data=despensa.DB.GestionPaquetes.getArregloPaquetes();
+        
+        DefaultTableModel defTableModel = new DefaultTableModel(data, columnNames);
+        
+        tabla.setModel(defTableModel);
+    }
+     
      //actualizar Combobox de proveedores
     public static void actualizarComboBoxProveedor(JComboBox combo){
         combo.setModel(despensa.DB.GestionProveedor.getDefaultCboModel());
@@ -53,6 +75,10 @@ public class Principal extends javax.swing.JFrame {
     //actulizar combobox productos
     public static void actualizarComboBoxProducto(JComboBox combo){
         combo.setModel(despensa.DB.GestionProducto.getDefaultCboModelProducto());
+    
+    }
+    public static void actualizarComboBoxPaquete(JComboBox combo){
+        combo.setModel(despensa.DB.GestionPaquetes.getDefaultCboModelPaquetes());
     
     }
     
@@ -67,17 +93,24 @@ public class Principal extends javax.swing.JFrame {
 
         escritorioP = new javax.swing.JDesktopPane();
         menuBar = new javax.swing.JMenuBar();
-        editMenu = new javax.swing.JMenu();
+        GestionPaquetes = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
         Gesptoducto = new javax.swing.JMenuItem();
+        paquetes = new javax.swing.JMenuItem();
         helpMenu = new javax.swing.JMenu();
-        contentMenuItem = new javax.swing.JMenuItem();
-        aboutMenuItem = new javax.swing.JMenuItem();
+        reporteProveedores = new javax.swing.JMenuItem();
+        reportePro = new javax.swing.JMenuItem();
+        reportPaq = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        editMenu.setMnemonic('e');
-        editMenu.setText("Edit");
+        GestionPaquetes.setMnemonic('e');
+        GestionPaquetes.setText("Gestiones");
+        GestionPaquetes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                GestionPaquetesActionPerformed(evt);
+            }
+        });
 
         jMenuItem1.setText("Proveedor");
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
@@ -85,7 +118,7 @@ public class Principal extends javax.swing.JFrame {
                 jMenuItem1ActionPerformed(evt);
             }
         });
-        editMenu.add(jMenuItem1);
+        GestionPaquetes.add(jMenuItem1);
 
         Gesptoducto.setText("Producto");
         Gesptoducto.addActionListener(new java.awt.event.ActionListener() {
@@ -93,20 +126,46 @@ public class Principal extends javax.swing.JFrame {
                 GesptoductoActionPerformed(evt);
             }
         });
-        editMenu.add(Gesptoducto);
+        GestionPaquetes.add(Gesptoducto);
 
-        menuBar.add(editMenu);
+        paquetes.setText("Paquetes");
+        paquetes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                paquetesActionPerformed(evt);
+            }
+        });
+        GestionPaquetes.add(paquetes);
+
+        menuBar.add(GestionPaquetes);
 
         helpMenu.setMnemonic('h');
-        helpMenu.setText("Help");
+        helpMenu.setText("Reportes");
 
-        contentMenuItem.setMnemonic('c');
-        contentMenuItem.setText("Contents");
-        helpMenu.add(contentMenuItem);
+        reporteProveedores.setMnemonic('c');
+        reporteProveedores.setText("Reporte Proveedores");
+        reporteProveedores.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                reporteProveedoresActionPerformed(evt);
+            }
+        });
+        helpMenu.add(reporteProveedores);
 
-        aboutMenuItem.setMnemonic('a');
-        aboutMenuItem.setText("About");
-        helpMenu.add(aboutMenuItem);
+        reportePro.setMnemonic('a');
+        reportePro.setText("Reporte Productos");
+        reportePro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                reporteProActionPerformed(evt);
+            }
+        });
+        helpMenu.add(reportePro);
+
+        reportPaq.setText("Reporte Paquetes");
+        reportPaq.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                reportPaqActionPerformed(evt);
+            }
+        });
+        helpMenu.add(reportPaq);
 
         menuBar.add(helpMenu);
 
@@ -143,6 +202,73 @@ public class Principal extends javax.swing.JFrame {
         ventana.setLocation((desktopSize.width - FrameSize.width)/2, (desktopSize.height- FrameSize.height)/2);
         ventana.show();
     }//GEN-LAST:event_GesptoductoActionPerformed
+
+    private void GestionPaquetesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GestionPaquetesActionPerformed
+        
+    }//GEN-LAST:event_GestionPaquetesActionPerformed
+
+    private void paquetesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_paquetesActionPerformed
+         GestionPaquetes ventana = new GestionPaquetes();
+       Principal.escritorioP.add(ventana);
+        Dimension desktopSize = Principal.escritorioP.getSize();
+        Dimension FrameSize = ventana.getSize();
+        ventana.setLocation((desktopSize.width - FrameSize.width)/2, (desktopSize.height- FrameSize.height)/2);
+        ventana.show();
+    }//GEN-LAST:event_paquetesActionPerformed
+
+    private void reporteProveedoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reporteProveedoresActionPerformed
+        try {
+           Connection conn = Conexion.getConnection();
+            JasperReport reporte = null;
+            String path ="src\\Reportes\\ReportesProveedores.jasper";
+            reporte = (JasperReport) JRLoader.loadObjectFromFile(path);
+            JasperPrint jprint = JasperFillManager.fillReport(reporte, null, conn);
+            JasperViewer view  = new JasperViewer(jprint, false);
+            view.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+            view.setVisible(true);
+              conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (JRException ex) {
+            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_reporteProveedoresActionPerformed
+
+    private void reporteProActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reporteProActionPerformed
+       try {
+           Connection conn = Conexion.getConnection();
+            JasperReport reporte = null;
+            String path ="src\\Reportes\\ReporteProductos.jasper";
+            reporte = (JasperReport) JRLoader.loadObjectFromFile(path);
+            JasperPrint jprint = JasperFillManager.fillReport(reporte, null, conn);
+            JasperViewer view  = new JasperViewer(jprint, false);
+            view.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+            view.setVisible(true);
+              conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (JRException ex) {
+            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_reporteProActionPerformed
+
+    private void reportPaqActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reportPaqActionPerformed
+        try {
+           Connection conn = Conexion.getConnection();
+            JasperReport reporte = null;
+            String path ="src\\Reportes\\ReportePaquetes.jasper";
+            reporte = (JasperReport) JRLoader.loadObjectFromFile(path);
+            JasperPrint jprint = JasperFillManager.fillReport(reporte, null, conn);
+            JasperViewer view  = new JasperViewer(jprint, false);
+            view.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+            view.setVisible(true);
+              conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (JRException ex) {
+            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_reportPaqActionPerformed
 
     /**
      * @param args the command line arguments
@@ -181,13 +307,15 @@ public class Principal extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem Gesptoducto;
-    private javax.swing.JMenuItem aboutMenuItem;
-    private javax.swing.JMenuItem contentMenuItem;
-    private javax.swing.JMenu editMenu;
+    private javax.swing.JMenu GestionPaquetes;
     public static javax.swing.JDesktopPane escritorioP;
     private javax.swing.JMenu helpMenu;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuBar menuBar;
+    private javax.swing.JMenuItem paquetes;
+    private javax.swing.JMenuItem reportPaq;
+    private javax.swing.JMenuItem reportePro;
+    private javax.swing.JMenuItem reporteProveedores;
     // End of variables declaration//GEN-END:variables
 
 }

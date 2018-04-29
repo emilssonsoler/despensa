@@ -108,14 +108,14 @@ public class GestionPaquetes {
         }
         return result;
     }
-      public static void modificarPaquetesTodosLosCamposUpdate(int idProductos,java.sql.Date fechaven,int cantidad,int idpaquete) {
+      public static void modificarPaquetesTodosLosCamposUpdate(int idProductos,String fechaven,int cantidad,int idpaquete) {
         String sqlUpdate = "UPDATE Paquetes "
                 + "SET idProductosInPaquetes = ?,fechaDeVencimiento = ?,Cantidad=?"
                 + " WHERE idPaquetes = ?";
         try (Connection conn = Conexion.getConnection();
                 PreparedStatement pstmt = conn.prepareStatement(sqlUpdate)) {
             pstmt.setInt(1, idProductos);
-            pstmt.setDate(2, fechaven);
+            pstmt.setString(2, fechaven);
              pstmt.setInt(3, cantidad);
              pstmt.setInt(4,idpaquete);
            pstmt.execute();
