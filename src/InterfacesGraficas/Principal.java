@@ -58,6 +58,12 @@ public class Principal extends javax.swing.JFrame {
     }
 
      //actualizar tabla paquetes
+     public static void actualizarInformacionTablaFactura(JTable tabla) {
+        String[] columnNames = {"Producto","Precio","Cantidad","Total"};
+        Object[][] data=despensa.DB.ProcesoDeVerificacionDeFactura.obtenerArregloDeLstCompra(Facturar.lstcompra);
+        DefaultTableModel defTableModel = new DefaultTableModel(data, columnNames);
+        tabla.setModel(defTableModel);
+    }
      public static void actualizarInformacionTablaPaquetes(JTable tabla) {
         String[] columnNames = {"Producto","Cantidad","Fecha de vencimiento","Proveedor"};
         Object[][] data=despensa.DB.GestionPaquetes.getArregloPaquetes();
@@ -97,6 +103,7 @@ public class Principal extends javax.swing.JFrame {
         jMenuItem1 = new javax.swing.JMenuItem();
         Gesptoducto = new javax.swing.JMenuItem();
         paquetes = new javax.swing.JMenuItem();
+        factura = new javax.swing.JMenuItem();
         helpMenu = new javax.swing.JMenu();
         reporteProveedores = new javax.swing.JMenuItem();
         reportePro = new javax.swing.JMenuItem();
@@ -135,6 +142,14 @@ public class Principal extends javax.swing.JFrame {
             }
         });
         GestionPaquetes.add(paquetes);
+
+        factura.setText("Factura");
+        factura.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                facturaActionPerformed(evt);
+            }
+        });
+        GestionPaquetes.add(factura);
 
         menuBar.add(GestionPaquetes);
 
@@ -270,6 +285,15 @@ public class Principal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_reportPaqActionPerformed
 
+    private void facturaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_facturaActionPerformed
+        Facturar ventana = new Facturar();
+       Principal.escritorioP.add(ventana);
+        Dimension desktopSize = Principal.escritorioP.getSize();
+        Dimension FrameSize = ventana.getSize();
+        ventana.setLocation((desktopSize.width - FrameSize.width)/2, (desktopSize.height- FrameSize.height)/2);
+        ventana.show();
+    }//GEN-LAST:event_facturaActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -309,6 +333,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenuItem Gesptoducto;
     private javax.swing.JMenu GestionPaquetes;
     public static javax.swing.JDesktopPane escritorioP;
+    private javax.swing.JMenuItem factura;
     private javax.swing.JMenu helpMenu;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuBar menuBar;

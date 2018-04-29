@@ -175,7 +175,7 @@ public class GestionPaquetes extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_eliminarActionPerformed
 
     private void modificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modificarActionPerformed
-        modificarPaquete ventana = new modificarPaquete();
+        ModificarPaquete ventana = new ModificarPaquete();
        Principal.escritorioP.add(ventana);
         Dimension desktopSize = Principal.escritorioP.getSize();
         Dimension FrameSize = ventana.getSize();

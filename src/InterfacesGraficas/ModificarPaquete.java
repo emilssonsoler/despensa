@@ -11,12 +11,12 @@ import javax.swing.JOptionPane;
  *
  * @author
  */
-public class modificarPaquete extends javax.swing.JInternalFrame {
+public class ModificarPaquete extends javax.swing.JInternalFrame {
 
     /**
      * Creates new form frmTipoHabitacion
      */
-    public modificarPaquete() {
+    public ModificarPaquete() {
         initComponents();
         Principal.actualizarComboBoxPaquete(paquetecombobox);
         Principal.actualizarComboBoxProducto(productoCombobox);
