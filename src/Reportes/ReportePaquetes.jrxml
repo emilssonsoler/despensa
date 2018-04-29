@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ReportePaquetes" language="groovy" pageWidth="612" pageHeight="792" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="5831fcac-5c32-4fd7-895c-f12822a2e031">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="10"/>
+	<queryString>
+		<![CDATA[SELECT
+     paquetes.`fechaDeVencimiento` AS paquetes_fechaDeVencimiento,
+     paquetes.`Cantidad` AS paquetes_Cantidad,
+     productos.`CodigoDeProducto` AS productos_CodigoDeProducto,
+     productos.`nombreProducto` AS productos_nombreProducto
+FROM
+     `productos` productos INNER JOIN `paquetes` paquetes ON productos.`idProductos` = paquetes.`idProductosInPaquetes`]]>
+	</queryString>
+	<field name="paquetes_fechaDeVencimiento" class="java.sql.Date"/>
+	<field name="paquetes_Cantidad" class="java.lang.Integer"/>
+	<field name="productos_CodigoDeProducto" class="java.lang.Integer"/>
+	<field name="productos_nombreProducto" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement x="200" y="31" width="178" height="28" uuid="f267cf34-7d57-4a54-a33c-295aa521735b"/>
+				<textElement>
+					<font size="18" isBold="true" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Reportes Paquetes]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="61" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="19" width="110" height="20" uuid="1158dd77-ad66-42d3-8d91-f8699f6240cf"/>
+				<text><![CDATA[Nombre del Producto]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="156" y="19" width="100" height="20" uuid="29a3cd16-18b7-4158-a2da-d1e949716d20"/>
+				<text><![CDATA[Codigo del producto]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="336" y="19" width="66" height="20" uuid="cd7087bb-ad20-487e-86a7-fb9ec6502eac"/>
+				<text><![CDATA[Cantidad]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="455" y="19" width="117" height="20" uuid="8512f088-98b2-4400-91cc-f78b2a8c9bc6"/>
+				<text><![CDATA[Fecha de vencimiento]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="49" splitType="Stretch">
+			<textField>
+				<reportElement x="26" y="15" width="54" height="20" uuid="ecb61aa2-b17e-4685-ac33-ba338e0080f2"/>
+				<textFieldExpression><![CDATA[$F{productos_nombreProducto}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="171" y="15" width="66" height="20" uuid="306a74ef-3912-4f15-915f-242f72012937"/>
+				<textFieldExpression><![CDATA[$F{productos_CodigoDeProducto}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="349" y="15" width="42" height="20" uuid="ff98b82b-54a1-43f0-897b-4ce4bbabdb5e"/>
+				<textFieldExpression><![CDATA[$F{paquetes_Cantidad}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="483" y="15" width="50" height="20" uuid="4957cc0a-c36a-4851-be35-44f9ddac8d4c"/>
+				<textFieldExpression><![CDATA[$F{paquetes_fechaDeVencimiento}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch">
+			<textField>
+				<reportElement x="421" y="16" width="80" height="20" uuid="0ef5306b-d82f-4fce-a4bb-7666852aa385"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="501" y="16" width="40" height="20" uuid="4bdeac31-73fc-45b0-9862-6e0535f57f72"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

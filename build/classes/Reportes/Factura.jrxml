@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Factura" language="groovy" pageWidth="612" pageHeight="792" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="1ce4d344-3aac-4e2a-8218-82e229622c15">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString>
+		<![CDATA[select f.idFacturaEncabezado,p.nombreProducto,f.TotalFinal,  f.fechaActual, fd.cantidad, p.precioVenta,fd.total  from facturas f
+inner join facturadetalle fd on fd.idFacturaEncabezadoInFacturaDetalle = f.idFacturaEncabezado
+inner join productos p on p.idProductos = fd.idProductosInFacturaDetalle
+where f.idFacturaEncabezado = (select max(f.idFacturaEncabezado) from facturas);]]>
+	</queryString>
+	<field name="idFacturaEncabezado" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="nombreProducto" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="TotalFinal" class="java.lang.Float">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="fechaActual" class="java.sql.Date">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="cantidad" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="precioVenta" class="java.lang.Float">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="total" class="java.lang.Float">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement x="179" y="28" width="116" height="32" uuid="f15eb963-f0fe-4301-903a-db6fa8c87549"/>
+				<textElement>
+					<font size="20"/>
+				</textElement>
+				<text><![CDATA[Factura No.]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="313" y="28" width="43" height="32" uuid="2c00db38-ae97-4c36-b4c4-e9d17ffdd8e2"/>
+				<textElement>
+					<font size="18"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{idFacturaEncabezado}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy h.mm a">
+				<reportElement x="419" y="28" width="153" height="32" uuid="4cbcd56d-84ee-4c13-ad7f-c8c4fc67b7cd"/>
+				<textElement>
+					<font size="16"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="38" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="60" splitType="Stretch">
+			<staticText>
+				<reportElement x="41" y="22" width="100" height="32" uuid="6441af2a-a104-4d35-9dca-ac6611924496"/>
+				<textElement>
+					<font size="16"/>
+				</textElement>
+				<text><![CDATA[Producto]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="202" y="22" width="77" height="32" uuid="8641c82d-f9c2-4bcb-bd12-2438625f3d74"/>
+				<textElement>
+					<font size="16"/>
+				</textElement>
+				<text><![CDATA[Cantidad]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="382" y="22" width="56" height="32" uuid="2d3610b2-ac2b-47e5-bdf0-4563d1b7df53"/>
+				<textElement>
+					<font size="16"/>
+				</textElement>
+				<text><![CDATA[Precio]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="59" width="572" height="1" uuid="43a1ebb4-6bf8-4879-9a90-4f75aa32fcd6"/>
+			</line>
+			<staticText>
+				<reportElement x="473" y="22" width="74" height="32" uuid="9a0a7b0d-938d-4563-a181-11394e322663"/>
+				<textElement>
+					<font size="18"/>
+				</textElement>
+				<text><![CDATA[Sub-total]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="42" splitType="Stretch">
+			<textField>
+				<reportElement x="41" y="16" width="71" height="20" uuid="6869ef2c-ac84-44c7-b2fe-b157afe9c9e5"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nombreProducto}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="221" y="16" width="45" height="20" uuid="582e1b79-e3fc-4987-8962-5246022555a6"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cantidad}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="396" y="16" width="42" height="20" uuid="96061a05-8c52-4688-a0cd-c8ddc0e29caa"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{precioVenta}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="41" width="572" height="1" uuid="027c1f33-dfc0-48d5-8038-ad33ee737779"/>
+			</line>
+			<textField>
+				<reportElement x="490" y="16" width="57" height="20" uuid="bf142b6e-4551-4431-ab2f-1cb00c6e8446"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{total}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="72" splitType="Stretch">
+			<line>
+				<reportElement x="0" y="0" width="572" height="1" uuid="493ab5f7-7e0a-4257-88b2-a18e4a3247d4"/>
+			</line>
+			<staticText>
+				<reportElement x="438" y="13" width="69" height="32" uuid="a9c6acf4-2a2e-41da-b958-6da6c328ea8e"/>
+				<textElement>
+					<font size="22"/>
+				</textElement>
+				<text><![CDATA[Total :]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="507" y="13" width="65" height="32" uuid="6bcfc3e9-883a-41c7-9cd9-f947b728f0e8"/>
+				<textElement>
+					<font size="20"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{TotalFinal}]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>
