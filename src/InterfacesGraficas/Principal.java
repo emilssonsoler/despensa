@@ -25,6 +25,7 @@ public class Principal extends javax.swing.JFrame {
         setExtendedState(MAXIMIZED_BOTH);
     }
 
+    //actualiza tabla de proveedores
     public static void actualizarInformacionTablaProveedores(JTable tabla) {
         String[] columnNames = {"Nombre","Descripcion"};
         Object[][] data=despensa.DB.GestionProveedor.getArregloProveedores();
@@ -34,17 +35,24 @@ public class Principal extends javax.swing.JFrame {
         tabla.setModel(defTableModel);
     }
     
+    //actualizar tabla producto
      public static void actualizarInformacionTablaProducto(JTable tabla) {
         String[] columnNames = {"Nombre","Codigo","Proveedor","Precio Compra","Precio Venta","Refrigeracion"};
-        Object[][] data=despensa.DB.GestionProducto.getArregloProveedores();
+        Object[][] data=despensa.DB.GestionProducto.getArregloProducto();
         
         DefaultTableModel defTableModel = new DefaultTableModel(data, columnNames);
         
         tabla.setModel(defTableModel);
     }
 
+     //actualizar Combobox de proveedores
     public static void actualizarComboBoxProveedor(JComboBox combo){
         combo.setModel(despensa.DB.GestionProveedor.getDefaultCboModel());
+    
+    }
+    //actulizar combobox productos
+    public static void actualizarComboBoxProducto(JComboBox combo){
+        combo.setModel(despensa.DB.GestionProducto.getDefaultCboModelProducto());
     
     }
     

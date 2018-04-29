@@ -33,9 +33,9 @@ public class GestionProducto extends javax.swing.JInternalFrame {
          
         
     }
-    public static void buscarInformacionTablaProveedores(String busqueda){
-    String[] columnNames = {"Nombre","Descripcion"};
-        Object[][] data=despensa.DB.GestionProveedor.getArregloProveedoresPorNombrere(busqueda);
+    public static void buscarInformacionTablaProductos(String busqueda){
+    String[] columnNames = {"Nombre","Codigo","Proveedor","Precio Compra","Precio Venta","Refrigeracion"};
+        Object[][] data=despensa.DB.GestionProducto.getArregloProductoPorNombre(busqueda);
         
         DefaultTableModel defTableModel = new DefaultTableModel(data, columnNames);
         
@@ -101,7 +101,7 @@ public class GestionProducto extends javax.swing.JInternalFrame {
         });
         jMenu1.add(AgregarButton);
 
-        eliminarButton.setText("Eliminar Proveedor");
+        eliminarButton.setText("Eliminar Producto");
         eliminarButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 eliminarButtonActionPerformed(evt);
@@ -109,7 +109,7 @@ public class GestionProducto extends javax.swing.JInternalFrame {
         });
         jMenu1.add(eliminarButton);
 
-        modificarButton.setText("Modificar Proveedor");
+        modificarButton.setText("Modificar Producto");
         modificarButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 modificarButtonActionPerformed(evt);
@@ -127,19 +127,19 @@ public class GestionProducto extends javax.swing.JInternalFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 507, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 627, Short.MAX_VALUE)
                 .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addGap(164, 164, 164)
-                .addComponent(Buscar, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(Buscar, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(187, 187, 187))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(Buscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(42, 42, 42)
+                .addContainerGap(31, Short.MAX_VALUE)
+                .addComponent(Buscar, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 321, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -167,7 +167,7 @@ public class GestionProducto extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_AgregarButtonActionPerformed
 
     private void eliminarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarButtonActionPerformed
-         EliminarProveedor ventana = new EliminarProveedor();
+         EliminarProducto ventana = new EliminarProducto();
        Principal.escritorioP.add(ventana);
         Dimension desktopSize = Principal.escritorioP.getSize();
         Dimension FrameSize = ventana.getSize();
@@ -176,7 +176,7 @@ public class GestionProducto extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_eliminarButtonActionPerformed
 
     private void modificarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modificarButtonActionPerformed
-        ModificarProveedor ventana = new ModificarProveedor();
+        ModificarProducto ventana = new ModificarProducto();
        Principal.escritorioP.add(ventana);
         Dimension desktopSize = Principal.escritorioP.getSize();
         Dimension FrameSize = ventana.getSize();
@@ -185,7 +185,7 @@ public class GestionProducto extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_modificarButtonActionPerformed
 
     private void BuscarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BuscarKeyReleased
-        buscarInformacionTablaProveedores(this.Buscar.getText());
+        buscarInformacionTablaProductos(this.Buscar.getText());
     }//GEN-LAST:event_BuscarKeyReleased
 
 

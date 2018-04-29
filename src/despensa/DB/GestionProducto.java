@@ -76,7 +76,7 @@ public class GestionProducto {
         }
         return lis;
     }
-    public static Object[][] getArregloProveedores() {
+    public static Object[][] getArregloProducto() {
         LinkedList<despensa.Producto> lista = getLinkedListProducto();
         Object[][] data = new Object[lista.size()][6];
 
@@ -139,6 +139,46 @@ public class GestionProducto {
             System.out.println(e.getMessage());
 
         }
+    }
+     public static LinkedList getLinkedListProductoPorNombre(String txt) {
+        String sql = "select * from productos p inner join proveedores pr on p.idProveedoresInProductos = pr.idProveedores where nombreProducto like" + '"' + txt + "%" + '"';
+        LinkedList<despensa.Producto> lis = new LinkedList<>();
+        try (Connection conn = Conexion.getConnection();
+                Statement stmt = conn.createStatement();
+                ResultSet rs = stmt.executeQuery(sql);) {
+
+            while (rs.next()) {
+                lis.add(new Producto(rs.getInt("CodigoDeProducto"),rs.getInt("idProductos"), rs.getString("nombreProducto"), rs.getFloat("precioCompra"), rs.getFloat("precioVenta"), new Proveedor(rs.getString("nombre"),rs.getString("Descripcion"),rs.getInt("idProveedores")), rs.getBoolean("refrigeracion")));
+
+            }
+
+            stmt.close();
+            rs.close();
+            conn.close();
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        return lis;
+    }
+     public static Object[][] getArregloProductoPorNombre(String txt){
+        LinkedList<despensa.Producto> lista = getLinkedListProductoPorNombre(txt);
+        Object[][] data = new Object[lista.size()][6];
+
+        for (int i = 0; i < lista.size(); i++) {
+             data[i][0] = lista.get(i).getNombre();
+            data[i][1] = lista.get(i).getCodigo();
+            data[i][2] = lista.get(i).getProveedor().getNombre();
+            data[i][3] = lista.get(i).getPrecioCompra();
+            data[i][4] = lista.get(i).getPrecioVenta();
+            data[i][5] = "No";
+            if (lista.get(i).getRefrigeracion().isRefrigeracion()) {
+               data[i][5] = "Si";
+            }
+            
+             
+
+        }
+        return data;
     }
       /**
      * metodo para convertir la lista de proveedores en un combobox
