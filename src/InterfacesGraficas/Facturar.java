@@ -6,6 +6,7 @@
 package InterfacesGraficas;
 
 import despensa.FacturaDetalleDB;
+import despensa.Paquete;
 import java.util.LinkedList;
 
 /**
@@ -80,6 +81,11 @@ public class Facturar extends javax.swing.JInternalFrame {
         });
 
         facturarButton.setText("Facturar");
+        facturarButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                facturarButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -198,6 +204,35 @@ public class Facturar extends javax.swing.JInternalFrame {
         } catch (Exception e) {
         }
     }//GEN-LAST:event_agragarbuttonActionPerformed
+
+    private void facturarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_facturarButtonActionPerformed
+        try {
+            despensa.DB.GestionFactura.agregarFactura(despensa.AdminFechas.getFechaActualString(), despensa.DB.ProcesoDeVerificacionDeFactura.obtenerTotalFinal(lstcompra));
+            for (FacturaDetalleDB facturaDetalleDB : lstcompra) {
+                despensa.DB.GestionFactura.agregarFacturaDetalle(despensa.DB.GestionFactura.obtenerUltimoIdGenerado(), facturaDetalleDB.getProducto().getCodigoDB(), facturaDetalleDB.getCantidad(),facturaDetalleDB.getTotal() );
+            }
+            
+            if (beta.isEmpty()) {
+                despensa.DB.GestionFactura.limpiarTabla();
+                for (Paquete paquete : original) {
+                    despensa.DB.GestionFactura.actualizarBaseDeDatosPaquetes(paquete.getFechaVencimiento(),paquete.getPrd().getCodigoDB(),paquete.getPrd().getProveedor().getCodigo(), paquete.getCantidad());
+                }
+            }else{
+            despensa.DB.GestionFactura.limpiarTabla();
+                for (Paquete paquete : beta) {
+                    despensa.DB.GestionFactura.actualizarBaseDeDatosPaquetes(paquete.getFechaVencimiento(),paquete.getPrd().getCodigoDB(),paquete.getPrd().getProveedor().getCodigo(), paquete.getCantidad());
+                }
+            }
+            contador =1;
+            cantidad=1;
+            lstcompra.clear();
+            original =despensa.DB.GestionPaquetes.getLinkedListPaquetes();
+            beta.clear();
+            despensa.DB.GestionFactura.generarFacturaPDF();
+            Principal.actualizarInformacionTablaFactura(factura);
+        } catch (Exception e) {
+        }
+    }//GEN-LAST:event_facturarButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
