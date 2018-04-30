@@ -104,6 +104,7 @@ public class Principal extends javax.swing.JFrame {
         Gesptoducto = new javax.swing.JMenuItem();
         paquetes = new javax.swing.JMenuItem();
         factura = new javax.swing.JMenuItem();
+        empleadobutton = new javax.swing.JMenuItem();
         helpMenu = new javax.swing.JMenu();
         reporteProveedores = new javax.swing.JMenuItem();
         reportePro = new javax.swing.JMenuItem();
@@ -150,6 +151,14 @@ public class Principal extends javax.swing.JFrame {
             }
         });
         GestionPaquetes.add(factura);
+
+        empleadobutton.setText("Empleado");
+        empleadobutton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                empleadobuttonActionPerformed(evt);
+            }
+        });
+        GestionPaquetes.add(empleadobutton);
 
         menuBar.add(GestionPaquetes);
 
@@ -294,6 +303,15 @@ public class Principal extends javax.swing.JFrame {
         ventana.show();
     }//GEN-LAST:event_facturaActionPerformed
 
+    private void empleadobuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_empleadobuttonActionPerformed
+         GestionEmpleado ventana = new GestionEmpleado();
+       Principal.escritorioP.add(ventana);
+        Dimension desktopSize = Principal.escritorioP.getSize();
+        Dimension FrameSize = ventana.getSize();
+        ventana.setLocation((desktopSize.width - FrameSize.width)/2, (desktopSize.height- FrameSize.height)/2);
+        ventana.show();
+    }//GEN-LAST:event_empleadobuttonActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -332,6 +350,7 @@ public class Principal extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem Gesptoducto;
     private javax.swing.JMenu GestionPaquetes;
+    private javax.swing.JMenuItem empleadobutton;
     public static javax.swing.JDesktopPane escritorioP;
     private javax.swing.JMenuItem factura;
     private javax.swing.JMenu helpMenu;

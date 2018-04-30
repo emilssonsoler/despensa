@@ -20,6 +20,7 @@ public class Producto  implements Serializable{
     private float precioVenta;
     private Proveedor proveedor;
     private Refrigeracion refrigeracion;
+    private float promocion ;
 
     public Producto() {
     }
@@ -169,6 +170,14 @@ public class Producto  implements Serializable{
    public String toString(){
    return this.nombre;
    }
+
+    public float getPromocion() {
+        return promocion;
+    }
+
+    public void setPromocion(float promocion) {
+        this.promocion = promocion;
+    }
     
     
     
