@@ -52,7 +52,7 @@ public class GestionEmpleado {
     }
 
 
- public static LinkedList getLinkedListProveedores() {
+ public static LinkedList getLinkedListEmpleado() {
         String sql = "select * from empleados";
         LinkedList<despensa.Empleado> lis = new LinkedList<>();
         try (Connection conn = Conexion.getConnection();
@@ -60,7 +60,7 @@ public class GestionEmpleado {
                 ResultSet rs = stmt.executeQuery(sql);) {
 
             while (rs.next()) {
-               // lis.add(new Empleado(rs.getInt(sql), 0, 0, fechaInicio, sql, sql, sql, sql, sql, sql))
+                lis.addLast(new Empleado(rs.getInt("codigoEmpleado"), rs.getInt("idEmpleados"), rs.getFloat("sueldo"), rs.getString("fechaDeInicio"), rs.getString("pNombre"), rs.getString("sNombre"), rs.getString("pApellido"), rs.getString("sApellido"), rs.getString("direccion"), rs.getString("numeroTelefonico")));
 
             }
             stmt.close();
@@ -70,5 +70,21 @@ public class GestionEmpleado {
             System.out.println(ex.getMessage());
         }
         return lis;
+    }
+ 
+ public static Object[][] getArregloEmpleado() {
+        LinkedList<despensa.Empleado> lista = getLinkedListEmpleado();
+        Object[][] data = new Object[lista.size()][6];
+
+        for (int i = 0; i < lista.size(); i++) {
+            data[i][0] = lista.get(i).getNombreCompleto();
+            data[i][1] = lista.get(i).getIdEmpleado();
+            data[i][2]=lista.get(i).getSueldo();
+            data[i][3]=lista.get(i).getFechaInicio();
+            data[i][4]=lista.get(i).getDireccion();
+            data[i][5]=lista.get(i).getNumeroTelefonico();
+
+        }
+        return data;
     }
 }

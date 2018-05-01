@@ -15,7 +15,7 @@ public  class Empleado extends Persona {
     private int idEmpleado;
     private int idEmpleadoDB;
     private float sueldo;
-    private java.sql.Date fechaInicio;
+    private String fechaInicio;
     
 
     public Empleado() {
@@ -35,7 +35,7 @@ public  class Empleado extends Persona {
      * @param direccion
      * @param numeroTelefonico 
      */
-    public Empleado(int idEmpleado, int idEmpleadoDB, float sueldo, java.sql.Date fechaInicio, String pNombre, String sNombre, String pApellido, String sApellido, String direccion, String numeroTelefonico) {       
+    public Empleado(int idEmpleado, int idEmpleadoDB, float sueldo, String fechaInicio, String pNombre, String sNombre, String pApellido, String sApellido, String direccion, String numeroTelefonico) {       
         super(pNombre, sNombre, pApellido, sApellido, direccion, numeroTelefonico);
         this.idEmpleado = idEmpleado;
         this.idEmpleadoDB = idEmpleadoDB;
@@ -81,7 +81,7 @@ public  class Empleado extends Persona {
         return idEmpleadoDB;
     }
 
-    public java.sql.Date getFechaInicio() {
+    public String getFechaInicio() {
         return fechaInicio;
     }
 
@@ -89,7 +89,7 @@ public  class Empleado extends Persona {
      *
      * @return fechaInicio 
      */
-    public void setFechaInicio(java.sql.Date fechaInicio) {   
+    public void setFechaInicio(String fechaInicio) {   
         this.fechaInicio = fechaInicio;
     }
 

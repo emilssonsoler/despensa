@@ -158,7 +158,7 @@ abstract class Persona {
      * @return String que es el nombre completo de la persona
      */
      public String getNombreCompleto(){
-    return String.format("%s "+"%s "+"%s "+"%s", this.pNombre,this.sNombre,this.pApellido,this.sApellido);
+    return String.format("%s  "+"%s "+"%s "+"%s", this.pNombre,this.sNombre,this.pApellido,this.sApellido);
     
     }
      

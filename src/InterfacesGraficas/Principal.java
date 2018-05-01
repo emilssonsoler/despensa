@@ -38,7 +38,15 @@ public class Principal extends javax.swing.JFrame {
     }
 
     //actualiza tabla de proveedores
-    public static void actualizarInformacionTablaProveedores(JTable tabla) {
+    public static void actualizarInformacionTablaEmpleado(JTable tabla) {
+        String[] columnNames = {"Nombre Completo","Codigo de Empleado","Sueldo","Fecha Inicio","Direccion","Numero Telefonico"};
+        Object[][] data=despensa.DB.GestionEmpleado.getArregloEmpleado();
+        
+        DefaultTableModel defTableModel = new DefaultTableModel(data, columnNames);
+        
+        tabla.setModel(defTableModel);
+    }
+     public static void actualizarInformacionTablaProveedores(JTable tabla) {
         String[] columnNames = {"Nombre","Descripcion"};
         Object[][] data=despensa.DB.GestionProveedor.getArregloProveedores();
         

@@ -192,6 +192,7 @@ public class AgregarEmpleado extends javax.swing.JInternalFrame {
        float salario = Float.parseFloat(this.sueldoField.getText());
        String fechaI = this.fehcaInicoField.getText();
        int numEm= Integer.parseInt(this.idField.getText());
+       Principal.actualizarInformacionTablaEmpleado(GestionEmpleado.tablaEmpleado);
        despensa.DB.GestionEmpleado.agregarEmpleado(pNombre, sNombre, sApellido, sApellido, salario, numEm, direccion, telefono, fechaI);
         } catch (Exception e) {
             System.out.println(e.getMessage());
