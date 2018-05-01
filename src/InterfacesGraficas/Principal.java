@@ -33,6 +33,7 @@ public class Principal extends javax.swing.JFrame {
     public Principal() {
         initComponents();
         setExtendedState(MAXIMIZED_BOTH);
+        
     }
 
     //actualiza tabla de proveedores
@@ -119,6 +120,7 @@ public class Principal extends javax.swing.JFrame {
         reporteProveedores = new javax.swing.JMenuItem();
         reportePro = new javax.swing.JMenuItem();
         reportPaq = new javax.swing.JMenuItem();
+        reporteEmpleado = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -200,6 +202,14 @@ public class Principal extends javax.swing.JFrame {
             }
         });
         helpMenu.add(reportPaq);
+
+        reporteEmpleado.setText("Reporte Empleado");
+        reporteEmpleado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                reporteEmpleadoActionPerformed(evt);
+            }
+        });
+        helpMenu.add(reporteEmpleado);
 
         menuBar.add(helpMenu);
 
@@ -322,6 +332,24 @@ public class Principal extends javax.swing.JFrame {
         ventana.show();
     }//GEN-LAST:event_empleadobuttonActionPerformed
 
+    private void reporteEmpleadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reporteEmpleadoActionPerformed
+         try {
+           Connection conn = Conexion.getConnection();
+            JasperReport reporte = null;
+            String path ="src\\Reportes\\ReporteEmpleados.jasper";
+            reporte = (JasperReport) JRLoader.loadObjectFromFile(path);
+            JasperPrint jprint = JasperFillManager.fillReport(reporte, null, conn);
+            JasperViewer view  = new JasperViewer(jprint, false);
+            view.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+            view.setVisible(true);
+              conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (JRException ex) {
+            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_reporteEmpleadoActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -368,6 +396,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenuBar menuBar;
     private javax.swing.JMenuItem paquetes;
     private javax.swing.JMenuItem reportPaq;
+    private javax.swing.JMenuItem reporteEmpleado;
     private javax.swing.JMenuItem reportePro;
     private javax.swing.JMenuItem reporteProveedores;
     // End of variables declaration//GEN-END:variables

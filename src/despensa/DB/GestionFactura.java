@@ -29,8 +29,8 @@ public class GestionFactura {
 
     public static void agregarFactura(java.sql.Date fechaActual,float total) {
 
-        String sql = "INSERT INTO Facturas(fechaActual,TotalFinal)"
-                + "VALUES(?,?)";
+        String sql = "INSERT INTO Facturas(FechaEmision,TotalFinal,Empleados_idEmpleados)"
+                + "VALUES(?,?,1)";
 
         try (Connection conn = Conexion.getConnection();
                 PreparedStatement pstmt = conn.prepareStatement(sql);) {
@@ -50,8 +50,8 @@ public class GestionFactura {
 
     public static void agregarFactura(String fechaActual,float total) {
 
-        String sql = "INSERT INTO Facturas(fechaActual,TotalFinal)"
-                + "VALUES(?,?)";
+        String sql = "INSERT INTO Facturas(FechaEmision,TotalFinal,Empleados_idEmpleados)"
+                + "VALUES(?,?,1)";
 
         try (Connection conn = Conexion.getConnection();
                 PreparedStatement pstmt = conn.prepareStatement(sql);) {

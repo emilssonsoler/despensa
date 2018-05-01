@@ -24,6 +24,7 @@ public class Facturar extends javax.swing.JInternalFrame {
 
     public Facturar() {
         initComponents();
+        lstcompra.clear();
         Principal.actualizarInformacionTablaFactura(factura);
 
     }
@@ -45,6 +46,7 @@ public class Facturar extends javax.swing.JInternalFrame {
         jLabel2 = new javax.swing.JLabel();
         agragarbutton = new javax.swing.JButton();
         facturarButton = new javax.swing.JButton();
+        totalfield = new javax.swing.JTextField();
 
         setClosable(true);
 
@@ -85,26 +87,34 @@ public class Facturar extends javax.swing.JInternalFrame {
             }
         });
 
+        totalfield.setEditable(false);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 481, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 482, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1)
-                .addGap(18, 18, 18)
-                .addComponent(codigoField, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel2)
-                .addGap(20, 20, 20)
-                .addComponent(cantidadField, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(agragarbutton)
-                .addGap(27, 27, 27))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(18, 18, 18)
+                        .addComponent(codigoField, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel2)
+                        .addGap(20, 20, 20)
+                        .addComponent(cantidadField, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(agragarbutton)
+                        .addGap(27, 27, 27))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(facturarButton)
+                        .addContainerGap())))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(facturarButton)
+                .addComponent(totalfield, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -118,8 +128,10 @@ public class Facturar extends javax.swing.JInternalFrame {
                     .addComponent(jLabel2)
                     .addComponent(agragarbutton))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 290, Short.MAX_VALUE)
-                .addGap(11, 11, 11)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
+                .addComponent(totalfield, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(facturarButton)
                 .addContainerGap())
         );
@@ -154,12 +166,14 @@ public class Facturar extends javax.swing.JInternalFrame {
                         beta = original;
                         contador++;
                         cantidad=1;
+                        this.totalfield.setText(String.valueOf(despensa.DB.ProcesoDeVerificacionDeFactura.obtenerTotalFinal(lstcompra)));
                     } else {
                         lstcompra.add(new FacturaDetalleDB(producto, cantidad, cantidad * producto.getPrecioVenta()));
                         Principal.actualizarInformacionTablaFactura(factura);
                         beta = original;
                         contador++;
                         cantidad=1;
+                         this.totalfield.setText(String.valueOf(despensa.DB.ProcesoDeVerificacionDeFactura.obtenerTotalFinal(lstcompra)));
                     }
                 } else {
 
@@ -186,11 +200,13 @@ public class Facturar extends javax.swing.JInternalFrame {
                             lstcompra = despensa.DB.ProcesoDeVerificacionDeFactura.setCantidadNueva(lstcompra, codigo, cantidad);
                             Principal.actualizarInformacionTablaFactura(factura);
                            cantidad=1;
+                            this.totalfield.setText(String.valueOf(despensa.DB.ProcesoDeVerificacionDeFactura.obtenerTotalFinal(lstcompra)));
                            
                         } else {
                             lstcompra.add(new FacturaDetalleDB(producto, cantidad, cantidad * producto.getPrecioVenta()));
                             Principal.actualizarInformacionTablaFactura(factura);
                               cantidad=1;
+                               this.totalfield.setText(String.valueOf(despensa.DB.ProcesoDeVerificacionDeFactura.obtenerTotalFinal(lstcompra)));
                            
                         }
                     } else {
@@ -229,6 +245,7 @@ public class Facturar extends javax.swing.JInternalFrame {
             beta.clear();
             despensa.DB.GestionFactura.generarFacturaPDF();
             Principal.actualizarInformacionTablaFactura(factura);
+            totalfield.setText(null);
         } catch (Exception e) {
         }
     }//GEN-LAST:event_facturarButtonActionPerformed
@@ -243,5 +260,6 @@ public class Facturar extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextField totalfield;
     // End of variables declaration//GEN-END:variables
 }
