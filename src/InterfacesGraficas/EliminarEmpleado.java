@@ -17,13 +17,14 @@ import javax.swing.JOptionPane;
 
 
 
-public class EliminarPaquete extends javax.swing.JInternalFrame {
+public class EliminarEmpleado extends javax.swing.JInternalFrame {
 
-    
    
-    public EliminarPaquete() {
+   
+    public EliminarEmpleado() {
         initComponents();
-        Principal.actualizarComboBoxPaquete(paquetesCombox);
+        Principal.actualizarComboBoxEmpleado(empleadoCombox);
+         
         
     }
 
@@ -36,12 +37,12 @@ public class EliminarPaquete extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        paquetesCombox = new javax.swing.JComboBox<>();
+        empleadoCombox = new javax.swing.JComboBox<>();
         eliminarButton = new javax.swing.JButton();
 
         setClosable(true);
 
-        paquetesCombox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        empleadoCombox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         eliminarButton.setText("Eliminar");
         eliminarButton.addActionListener(new java.awt.event.ActionListener() {
@@ -56,19 +57,19 @@ public class EliminarPaquete extends javax.swing.JInternalFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(39, 39, 39)
-                .addComponent(paquetesCombox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 97, Short.MAX_VALUE)
+                .addComponent(empleadoCombox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 122, Short.MAX_VALUE)
                 .addComponent(eliminarButton)
-                .addGap(43, 43, 43))
+                .addGap(68, 68, 68))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(102, 102, 102)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(eliminarButton)
-                    .addComponent(paquetesCombox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(100, Short.MAX_VALUE))
+                .addGap(101, 101, 101)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(empleadoCombox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(eliminarButton))
+                .addContainerGap(105, Short.MAX_VALUE))
         );
 
         pack();
@@ -76,17 +77,16 @@ public class EliminarPaquete extends javax.swing.JInternalFrame {
 
     private void eliminarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarButtonActionPerformed
        if (JOptionPane.showConfirmDialog(null, "esta seguro")==0) {
-            despensa.Paquete paquete = (despensa.Paquete) paquetesCombox.getSelectedItem();
-            despensa.DB.GestionPaquetes.eliminarDeDBProducto(paquete.getIdPaqueteDB());
-            Principal.actualizarComboBoxPaquete(paquetesCombox);
-            Principal.actualizarInformacionTablaPaquetes(GestionPaquetes.tablaPaquetes);
-            
+             despensa.Empleado empleado = (despensa.Empleado) this.empleadoCombox.getSelectedItem();
+             despensa.DB.GestionEmpleado.eliminarEmpleado(empleado.getIdEmpleadoDB());
+             Principal.actualizarComboBoxEmpleado(empleadoCombox);
+             Principal.actualizarInformacionTablaEmpleado(GestionEmpleado.tablaEmpleado);
         }
     }//GEN-LAST:event_eliminarButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton eliminarButton;
-    private javax.swing.JComboBox<String> paquetesCombox;
+    private javax.swing.JComboBox<String> empleadoCombox;
     // End of variables declaration//GEN-END:variables
 }

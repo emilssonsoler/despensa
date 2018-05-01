@@ -12,6 +12,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.LinkedList;
+import javax.swing.DefaultComboBoxModel;
 
 /**
  *
@@ -71,6 +72,25 @@ public class GestionEmpleado {
         }
         return lis;
     }
+  public static LinkedList getLinkedListEmpleadoPorNombre(String txt) {
+        String sql = "select * from empleados where pNombre like" + '"' + txt + "%" + '"';
+        LinkedList<despensa.Empleado> lis = new LinkedList<>();
+        try (Connection conn = Conexion.getConnection();
+                Statement stmt = conn.createStatement();
+                ResultSet rs = stmt.executeQuery(sql);) {
+
+            while (rs.next()) {
+                lis.addLast(new Empleado(rs.getInt("codigoEmpleado"), rs.getInt("idEmpleados"), rs.getFloat("sueldo"), rs.getString("fechaDeInicio"), rs.getString("pNombre"), rs.getString("sNombre"), rs.getString("pApellido"), rs.getString("sApellido"), rs.getString("direccion"), rs.getString("numeroTelefonico")));
+
+            }
+            stmt.close();
+            rs.close();
+            conn.close();
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        return lis;
+    }
  
  public static Object[][] getArregloEmpleado() {
         LinkedList<despensa.Empleado> lista = getLinkedListEmpleado();
@@ -87,4 +107,46 @@ public class GestionEmpleado {
         }
         return data;
     }
+ 
+ public static Object[][] getArregloEmpleadoPorNombre(String txt) {
+        LinkedList<despensa.Empleado> lista = getLinkedListEmpleadoPorNombre(txt);
+        Object[][] data = new Object[lista.size()][6];
+
+        for (int i = 0; i < lista.size(); i++) {
+            data[i][0] = lista.get(i).getNombreCompleto();
+            data[i][1] = lista.get(i).getIdEmpleado();
+            data[i][2]=lista.get(i).getSueldo();
+            data[i][3]=lista.get(i).getFechaInicio();
+            data[i][4]=lista.get(i).getDireccion();
+            data[i][5]=lista.get(i).getNumeroTelefonico();
+
+        }
+        return data;
+    }
+  
+     public static DefaultComboBoxModel getDefaultCboModelPaquetes() {
+        DefaultComboBoxModel model = new DefaultComboBoxModel();
+        LinkedList<despensa.Empleado> lista = getLinkedListEmpleado();
+        for (int i = 0; i < lista.size(); i++) {
+            model.addElement(lista.get(i));
+        }
+        return model;
+    }
+     
+     public static void eliminarEmpleado(int idEm){
+     
+     String sql = "delete from Empleados where  idEmpleados = ?";
+         try (Connection conn = Conexion.getConnection();
+                 PreparedStatement pstm = conn.prepareStatement(sql)){
+             pstm.setInt(1, idEm);
+             pstm.execute();
+             
+             pstm.close();
+             conn.close();
+             
+         } catch (Exception e) {
+             System.out.println(e.getMessage());
+         }
+     
+     }
 }

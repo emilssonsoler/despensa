@@ -9,7 +9,7 @@ package InterfacesGraficas;
 
 /**
  *
- * @author 
+ * @author Emilsson Soler
  */
 
 
@@ -17,10 +17,7 @@ package InterfacesGraficas;
 
 public class AgregarEmpleado extends javax.swing.JInternalFrame {
 
-    /**
-     * Creates new form frmTipoHabitacion
-     */
-   
+    
     public AgregarEmpleado() {
         initComponents();
          

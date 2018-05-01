@@ -14,7 +14,7 @@ import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * @author 
+ * @author Emilsson Soler
  */
 
 
@@ -22,9 +22,6 @@ import javax.swing.table.DefaultTableModel;
 
 public class GestionPaquetes extends javax.swing.JInternalFrame {
 
-    /**
-     * Creates new form frmTipoHabitacion
-     */
    
     public GestionPaquetes() {
         initComponents();
@@ -32,12 +29,10 @@ public class GestionPaquetes extends javax.swing.JInternalFrame {
          
         
     }
-    public static void buscarInformacionTablaProveedores(String busqueda){
-    String[] columnNames = {"Nombre","Descripcion"};
-        Object[][] data=despensa.DB.GestionProveedor.getArregloProveedoresPorNombrere(busqueda);
-        
+    public static void buscarInformacionTablaPaquetes(String busqueda){
+    String[] columnNames = {"Producto","Precio","Cantidad","Total"};
+        Object[][] data=despensa.DB.GestionPaquetes.getArregloPaquetesPorNombre(busqueda);
         DefaultTableModel defTableModel = new DefaultTableModel(data, columnNames);
-        
         tablaPaquetes.setModel(defTableModel);
     }
 
@@ -184,7 +179,7 @@ public class GestionPaquetes extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_modificarActionPerformed
 
     private void BuscarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BuscarKeyReleased
-        buscarInformacionTablaProveedores(this.Buscar.getText());
+        buscarInformacionTablaPaquetes(this.Buscar.getText());
     }//GEN-LAST:event_BuscarKeyReleased
 
 

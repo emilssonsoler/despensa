@@ -15,7 +15,7 @@ import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * @author 
+ * @author Emilsson Soler
  */
 
 
@@ -23,9 +23,7 @@ import javax.swing.table.DefaultTableModel;
 
 public class GestionEmpleado extends javax.swing.JInternalFrame {
 
-    /**
-     * Creates new form frmTipoHabitacion
-     */
+   
    
     public GestionEmpleado() {
         initComponents();
@@ -34,9 +32,9 @@ public class GestionEmpleado extends javax.swing.JInternalFrame {
          
         
     }
-    public static void buscarInformacionTablaProductos(String busqueda){
-    String[] columnNames = {"Nombre","Codigo","Proveedor","Precio Compra","Precio Venta","Refrigeracion"};
-        Object[][] data=despensa.DB.GestionProducto.getArregloProductoPorNombre(busqueda);
+    public static void buscarInformacionTablaEmpleadoPorNombre(String busqueda){
+    String[] columnNames = {"Nombre Completo","Codigo de Empleado","Sueldo","Fecha Inicio","Direccion","Numero Telefonico"};
+        Object[][] data=despensa.DB.GestionEmpleado.getArregloEmpleadoPorNombre(busqueda);
         
         DefaultTableModel defTableModel = new DefaultTableModel(data, columnNames);
         
@@ -59,7 +57,6 @@ public class GestionEmpleado extends javax.swing.JInternalFrame {
         jMenu1 = new javax.swing.JMenu();
         AgregarButton = new javax.swing.JMenuItem();
         eliminarButton = new javax.swing.JMenuItem();
-        modificarButton = new javax.swing.JMenuItem();
 
         setClosable(true);
 
@@ -102,21 +99,13 @@ public class GestionEmpleado extends javax.swing.JInternalFrame {
         });
         jMenu1.add(AgregarButton);
 
-        eliminarButton.setText("Eliminar Producto");
+        eliminarButton.setText("Eliminar Empleado");
         eliminarButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 eliminarButtonActionPerformed(evt);
             }
         });
         jMenu1.add(eliminarButton);
-
-        modificarButton.setText("Modificar Producto");
-        modificarButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                modificarButtonActionPerformed(evt);
-            }
-        });
-        jMenu1.add(modificarButton);
 
         jMenuBar1.add(jMenu1);
 
@@ -168,7 +157,7 @@ public class GestionEmpleado extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_AgregarButtonActionPerformed
 
     private void eliminarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarButtonActionPerformed
-         EliminarProducto ventana = new EliminarProducto();
+         EliminarEmpleado ventana = new EliminarEmpleado();
        Principal.escritorioP.add(ventana);
         Dimension desktopSize = Principal.escritorioP.getSize();
         Dimension FrameSize = ventana.getSize();
@@ -176,17 +165,8 @@ public class GestionEmpleado extends javax.swing.JInternalFrame {
         ventana.show();
     }//GEN-LAST:event_eliminarButtonActionPerformed
 
-    private void modificarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modificarButtonActionPerformed
-        ModificarProducto ventana = new ModificarProducto();
-       Principal.escritorioP.add(ventana);
-        Dimension desktopSize = Principal.escritorioP.getSize();
-        Dimension FrameSize = ventana.getSize();
-        ventana.setLocation((desktopSize.width - FrameSize.width)/2, (desktopSize.height- FrameSize.height)/2);
-        ventana.show();
-    }//GEN-LAST:event_modificarButtonActionPerformed
-
     private void BuscarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BuscarKeyReleased
-        buscarInformacionTablaProductos(this.Buscar.getText());
+        buscarInformacionTablaEmpleadoPorNombre(this.Buscar.getText());
     }//GEN-LAST:event_BuscarKeyReleased
 
 
@@ -197,7 +177,6 @@ public class GestionEmpleado extends javax.swing.JInternalFrame {
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JMenuItem modificarButton;
     public static javax.swing.JTable tablaEmpleado;
     // End of variables declaration//GEN-END:variables
 }

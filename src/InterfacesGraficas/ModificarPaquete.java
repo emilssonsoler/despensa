@@ -9,13 +9,11 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author
+ * @author Emilsson Soler
  */
 public class ModificarPaquete extends javax.swing.JInternalFrame {
 
-    /**
-     * Creates new form frmTipoHabitacion
-     */
+    
     public ModificarPaquete() {
         initComponents();
         Principal.actualizarComboBoxPaquete(paquetecombobox);

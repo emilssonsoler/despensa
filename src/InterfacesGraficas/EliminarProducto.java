@@ -11,7 +11,7 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author 
+ * @author Emilsson Soler
  */
 
 
@@ -19,9 +19,6 @@ import javax.swing.JOptionPane;
 
 public class EliminarProducto extends javax.swing.JInternalFrame {
 
-    /**
-     * Creates new form frmTipoHabitacion
-     */
    
     public EliminarProducto() {
         initComponents();

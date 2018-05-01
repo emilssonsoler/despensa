@@ -75,8 +75,46 @@ public class GestionPaquetes {
         return lis;
     }
      
+     public static LinkedList getLinkedListPaquetesPorNombre(String txt) {
+        String sql = "select * from paquetes p inner join productos  pr on p.idProductosInPaquetes = pr.idProductos inner join proveedores prove on p.idProveedoresInPaquetes = prove.idProveedores where nombreProducto like" + '"' + txt + "%" + '"';
+      
+        LinkedList<despensa.Paquete> lis = new LinkedList<>();
+        try (Connection conn = Conexion.getConnection();
+                Statement stmt = conn.createStatement();
+                ResultSet rs = stmt.executeQuery(sql);) {
+           
+            while (rs.next()) {
+               
+                 
+                lis.add(new despensa.Paquete(rs.getInt("idPaquetes"),rs.getDate("fechaDeVencimiento"), rs.getInt("Cantidad"),
+                        new Producto(rs.getInt("CodigoDeProducto"),rs.getInt("idProductos"), rs.getString("nombreProducto"), rs.getFloat("precioCompra"), rs.getFloat("precioVenta"), new Proveedor(rs.getString("nombre"),rs.getString("Descripcion"),rs.getInt("idProveedores")), rs.getBoolean("refrigeracion"))));
+                
+                
+            }
+            stmt.close();
+            rs.close();
+            conn.close();
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        return lis;
+    }
      public static Object[][] getArregloPaquetes() {
         LinkedList<despensa.Paquete> lista = getLinkedListPaquetes();
+        Object[][] data = new Object[lista.size()][4];
+
+        for (int i = 0; i < lista.size(); i++) {
+             data[i][0] = lista.get(i).getPrd().getNombre();
+            data[i][1] = lista.get(i).getCantidad();
+            data[i][2] = lista.get(i).getFechaVencimiento();
+            data[i][3] = lista.get(i).getPrd().getProveedor().getNombre();
+          
+
+        }
+        return data;
+    }
+      public static Object[][] getArregloPaquetesPorNombre(String txt) {
+        LinkedList<despensa.Paquete> lista = getLinkedListPaquetesPorNombre(txt);
         Object[][] data = new Object[lista.size()][4];
 
         for (int i = 0; i < lista.size(); i++) {

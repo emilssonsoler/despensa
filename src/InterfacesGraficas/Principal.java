@@ -29,9 +29,7 @@ import net.sf.jasperreports.view.JasperViewer;
  */
 public class Principal extends javax.swing.JFrame {
 
-    /**
-     * Creates new form Principal
-     */
+    
     public Principal() {
         initComponents();
         setExtendedState(MAXIMIZED_BOTH);
@@ -84,6 +82,10 @@ public class Principal extends javax.swing.JFrame {
      //actualizar Combobox de proveedores
     public static void actualizarComboBoxProveedor(JComboBox combo){
         combo.setModel(despensa.DB.GestionProveedor.getDefaultCboModel());
+    
+    }
+    public static void actualizarComboBoxEmpleado(JComboBox combo){
+        combo.setModel(despensa.DB.GestionEmpleado.getDefaultCboModelPaquetes());
     
     }
     //actulizar combobox productos

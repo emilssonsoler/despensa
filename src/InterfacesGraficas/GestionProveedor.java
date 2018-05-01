@@ -14,7 +14,7 @@ import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * @author 
+ * @author Emilsson Soler
  */
 
 
@@ -22,9 +22,7 @@ import javax.swing.table.DefaultTableModel;
 
 public class GestionProveedor extends javax.swing.JInternalFrame {
 
-    /**
-     * Creates new form frmTipoHabitacion
-     */
+   
    
     public GestionProveedor() {
         initComponents();

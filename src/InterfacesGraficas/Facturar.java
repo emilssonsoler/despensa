@@ -11,13 +11,11 @@ import java.util.LinkedList;
 
 /**
  *
- * @author
+ * @author Emilsson Soler
  */
 public class Facturar extends javax.swing.JInternalFrame {
 
-    /**
-     * Creates new form frmTipoHabitacion
-     */
+   
      LinkedList<despensa.Paquete> original = despensa.DB.GestionPaquetes.getLinkedListPaquetes();
      LinkedList<despensa.Paquete> beta = new LinkedList<>();
     public static LinkedList<despensa.FacturaDetalleDB> lstcompra = new LinkedList<>();

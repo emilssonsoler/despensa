@@ -11,7 +11,7 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author Emilsson
+ * @author Emilsson Soler
  */
 
 
@@ -19,9 +19,7 @@ import javax.swing.JOptionPane;
 
 public class ModificarProducto extends javax.swing.JInternalFrame {
 
-    /**
-     * Creates new form frmTipoHabitacion
-     */
+    
    
     public ModificarProducto() {
         initComponents();

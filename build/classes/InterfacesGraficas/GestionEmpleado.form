@@ -22,18 +22,10 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="eliminarButton">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Eliminar Producto"/>
+                <Property name="text" type="java.lang.String" value="Eliminar Empleado"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="eliminarButtonActionPerformed"/>
-              </Events>
-            </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="modificarButton">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Modificar Producto"/>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="modificarButtonActionPerformed"/>
               </Events>
             </MenuItem>
           </SubComponents>
